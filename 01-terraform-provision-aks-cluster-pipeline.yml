@@ -104,7 +104,7 @@ stages:
                   command: 'plan'
                   workingDirectory: '$(Pipeline.Workspace)/terraform-manifests-out'
                   environmentServiceName: 'Azure subscription 1(8ee902d5-3a88-44bd-bb63-6aeae8728ead)'
-                  commandOptions: '-var ssh_public_key=$(Agent.TempDirectory) -var environment=$(DEV_ENVIRONMENT) -out $(Pipeline.Workspace)/terraform-manifests-out/$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
+                  commandOptions: '-var ssh_public_key=$(ssh.secureFilePath) -var environment=$(DEV_ENVIRONMENT) -out $(Pipeline.Workspace)/terraform-manifests-out/$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
                   allowTelemetryCollection: false
 
               - task: TerraformCLI@0
