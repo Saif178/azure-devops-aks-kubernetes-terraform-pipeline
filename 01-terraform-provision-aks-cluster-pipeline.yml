@@ -25,21 +25,25 @@ stages:
         displayName: Terraform Install
         inputs:
           terraformVersion: 'latest'
+
       - task: TerraformCLI@0
         displayName: Terraform Init
         inputs:
           command: 'init'
           workingDirectory: '$(System.DefaultWorkingDirectory)/terraform-mainfests'
           backendType: 'azurerm'
-          backendServiceArm: 'terraform-aks-azurerm-svc-con'
+          backendServiceArm: 'Azure subscription 1(8ee902d5-3a88-44bd-bb63-6aeae8728ead)'
+          ensureBackend: true
           backendAzureRmResourceGroupName: 'terraform-storage-rg'
+          backendAzureRmResourceGroupLocation: 'centralus'
           backendAzureRmStorageAccountName: 'terraformstatexlrwdrzs'
           backendAzureRmContainerName: 'tfstatefiles'
           backendAzureRmKey: 'aks-base.tfstate'
           allowTelemetryCollection: false
+
       - task: TerraformCLI@0
         displayName: Terraform Validate
         inputs:
           command: 'validate'
           workingDirectory: '$(System.DefaultWorkingDirectory)/terraform-mainfests'
-          allowTelemetryCollection: false       
+          allowTelemetryCollection: false
